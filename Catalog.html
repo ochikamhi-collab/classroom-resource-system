@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Catalog</title>
+</head>
+
+<body>
+
+<h1>Resource Catalog</h1>
+
+<p id="output"></p>
+
+<a href="dashboard.html">Back to Dashboard</a>
+
+<script>
+var resources = JSON.parse(localStorage.getItem("resources")) || [];
+
+var output = document.getElementById("output");
+
+if (resources.length === 0) {
+    output.innerHTML = "No resources found";
+} else {
+    var text = "";
+
+    resources.forEach(function(item) {
+        text += item.name + " - " + item.subject + "<br>";
+    });
+
+    output.innerHTML = text;
+}
+</script>
+
+</body>
+</html>

@@ -1,26 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Upload Resource</title>
+    <title>Upload</title>
 </head>
 
 <body>
 
-    <h1>Upload Resource</h1>
+<h1>Upload Resource</h1>
 
-    <form>
-        <label>Resource Name:</label><br>
-        <input type="text" name="resourceName"><br><br>
+<input type="text" id="name" placeholder="Resource Name"><br><br>
+<input type="text" id="subject" placeholder="Subject"><br><br>
 
-        <label>Subject:</label><br>
-        <input type="text" name="subject"><br><br>
+<button onclick="save()">Save</button>
 
-        <button type="submit">Submit</button>
-    </form>
+<br><br>
+<a href="catalog.html">Go to Catalog</a>
 
-    <br>
+<script>
+function save() {
+    var name = document.getElementById("name").value;
+    var subject = document.getElementById("subject").value;
 
-    <a href="dashboard.html">Back to Dashboard</a>
+    var resources = JSON.parse(localStorage.getItem("resources")) || [];
+
+    resources.push({
+        name: name,
+        subject: subject
+    });
+
+    localStorage.setItem("resources", JSON.stringify(resources));
+
+    alert("Saved!");
+
+    window.location.href = "catalog.html";
+}
+</script>
 
 </body>
 </html>

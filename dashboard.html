@@ -6,19 +6,24 @@
 
 <body>
 
-    <h1>Dashboard</h1>
+<h1>Dashboard</h1>
 
-    <p>Welcome to your dashboard.</p>
+<p>Welcome to your dashboard</p>
 
-    <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="catalog.html">View Resources</a></li>
-    </ul>
+<h2>Quick Actions</h2>
 
-    <h2>Quick Actions</h2>
+<button onclick="goUpload()">Upload Resource</button>
+<button onclick="goCatalog()">View Resources</button>
 
-    <button>Upload Resource</button>
-    <button>View Resources</button>
+<script>
+function goUpload() {
+    window.location.href = "upload.html";
+}
+
+function goCatalog() {
+    window.location.href = "catalog.html";
+}
+</script>
 
 </body>
 </html>
