@@ -2,33 +2,84 @@
 <html>
 <head>
     <title>Catalog</title>
+     <style>
+        body {
+            background-color:burlywood;
+        }
+        </style>
 </head>
 
 <body>
 
 <h1>Resource Catalog</h1>
+<button onclick="clearAll()">clear All Resources</button>
 
 <p id="output"></p>
 
 <a href="dashboard.html">Back to Dashboard</a>
-
 <script>
-var resources = JSON.parse(localStorage.getItem("resources")) || [];
+function displayResources() {
+    var resources = JSON.parse(localStorage.getItem("resources")) || [];
+    var output = document.getElementById("output");
 
-var output = document.getElementById("output");
+    if (resources.length === 0) {
+        output.innerHTML = "No resources found";
+        return;
+    }
 
-if (resources.length === 0) {
-    output.innerHTML = "No resources found";
-} else {
-    var text = "";
+    var text = "<table border='1' style='margin:auto;'>";
 
-    resources.forEach(function(item) {
-        text += item.name + " - " + item.subject + "<br>";
+    text += "<tr><th>#</th><th>Name</th><th>Subject</th><th>Action</th></tr>";
+
+    resources.forEach(function(item, index) {
+        text += "<tr>";
+        text += "<td>" + (index + 1) + "</td>";
+        text += "<td>" + item.name + "</td>";
+        text += "<td>" + item.subject + "</td>";
+        text += "<td>";
+        text += "<button onclick='editResource(" + index + ")'>Edit</button> ";
+        text += "<button onclick='deleteResource(" + index + ")'>Delete</button>";
+        text += "</td>";
+        text += "</tr>";
     });
+
+    text += "</table>";
 
     output.innerHTML = text;
 }
+
+function deleteResource(index) {
+    var resources = JSON.parse(localStorage.getItem("resources")) || [];
+    resources.splice(index, 1);
+    localStorage.setItem("resources", JSON.stringify(resources));
+    displayResources();
+}
+
+function editResource(index) {
+    var resources = JSON.parse(localStorage.getItem("resources")) || [];
+
+    var newName = prompt("Enter new resource name:", resources[index].name);
+    var newSubject = prompt("Enter new subject:", resources[index].subject);
+
+    if (newName && newSubject) {
+        resources[index].name = newName;
+        resources[index].subject = newSubject;
+
+        localStorage.setItem("resources", JSON.stringify(resources));
+        displayResources();
+    }
+}
+
+function clearAll() {
+    if (confirm("Are you sure you want to clear all resources?")) {
+        localStorage.removeItem("resources");
+        displayResources();
+    }
+}
+
+displayResources();
 </script>
 
+
 </body>
-</html>
+</html>   

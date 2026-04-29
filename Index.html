@@ -1,16 +1,63 @@
 <!DOCTYPE html>
+<html>
 <head>
-    <title>Classroom management system></title>
-    <meta name="Description"
-    content="A system for Teachers and Students to share learning resources easily">
+    <title>Login</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f4f6f9;
+            text-align: center;
+        }
+
+        h1 {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px;
+            width: 250px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
-    <body>
-    <p>This is where our project begins </p>    <h1>welcome to the Clssroom Resource Management System</h1>
-    <ul>
-        <li><a href="dashboard.html">Go to dashboard</a></li>
-        <li><a href="catalog.html">view resources</a></li>
-        </ul>
-    </ul>
 
-        </body>
+<body>
 
+<h1>Login</h1>
+
+<input type="text" id="username" placeholder="Enter Username"><br>
+<input type="password" id="password" placeholder="Enter Password"><br>
+
+<button onclick="login()">Login</button>
+
+<script>
+function login() {
+    var user = document.getElementById("username").value;
+    var pass = document.getElementById("password").value;
+
+    if (user === "" || pass === "") {
+        alert("Please enter username and password");
+    } else {
+        alert("Login successful");
+        window.location.href = "dashboard.html";
+    }
+}
+</script>
+
+</body>
+</html>
