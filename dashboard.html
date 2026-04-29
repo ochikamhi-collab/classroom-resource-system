@@ -1,34 +1,116 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Classroom Resource System</title>
+
     <style>
         body {
-            background-color:burlywood;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f6f9;
         }
-        </style>
+
+        .container {
+            display: grid;
+            grid-template-rows: auto auto 1fr auto;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #e6f0ff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav button {
+            margin: 5px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        nav button:hover {
+            background-color: #0056b3;
+        }
+
+        main {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: white;
+            width: 250px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .card h3 {
+            color: #007BFF;
+        }
+
+        footer {
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
 </head>
+
 <body>
 
+<div class="container">
 
-<h1>Dashboard</h1>
+    <header>
+        <h1>Classroom Resource Management System</h1>
+        <p>Welcome to your Dashboard</p>
+    </header>
 
-<p>Welcome to your dashboard</p>
+    <nav>
+        <button onclick="window.location.href='upload.html'">Upload Resource</button>
+        <button onclick="window.location.href='catalog.html'">View Resources</button>
+    </nav>
 
-<h2>Quick Actions</h2>
+    <main>
+        <div class="card">
+            <h3>Upload Resources</h3>
+            <p>Add new study materials for students.</p>
+        </div>
 
-<button onclick="goUpload()">Upload Resource</button>
-<button onclick="goCatalog()">View Resources</button>
+        <div class="card">
+            <h3>View Resources</h3>
+            <p>Check all available uploaded materials.</p>
+        </div>
 
-<script>
-function goUpload() {
-    window.location.href = "upload.html";
-}
+        <div class="card">
+            <h3>Manage Resources</h3>
+            <p>Edit or delete resources easily.</p>
+        </div>
+    </main>
 
-function goCatalog() {
-    window.location.href = "catalog.html";
-}
-</script>
+    <footer>
+        <p>© 2026 Classroom Resource System</p>
+    </footer>
+
+</div>
 
 </body>
 </html>

@@ -1,43 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Upload</title>
-     <style>
+    <meta charset="UTF-8">
+    <title>Upload Resource</title>
+
+    <style>
         body {
-            background-color:burlywood;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f6f9;
+            text-align: center;
         }
-        </style>
+
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px;
+        }
+
+        .container {
+            margin-top: 40px;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px;
+            width: 250px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .back {
+            margin-top: 20px;
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
 
-<h1>Upload Resource</h1>
+<header>
+    <h1>Upload Resource</h1>
+</header>
 
-<input type="text" id="name" placeholder="Resource Name"><br><br>
-<input type="text" id="subject" placeholder="Subject"><br><br>
+<div class="container">
 
-<button onclick="save()">Save</button>
+    <input type="text" id="name" placeholder="Resource Name"><br>
+    <input type="text" id="subject" placeholder="Subject"><br>
 
-<br><br>
-<a href="catalog.html">Go to Catalog</a>
+    <button onclick="saveResource()">Save Resource</button>
+
+    <button class="back" onclick="window.location.href='dashboard.html'">
+        Back to Dashboard
+    </button>
+
+</div>
 
 <script>
-function save() {
+function saveResource() {
     var name = document.getElementById("name").value;
     var subject = document.getElementById("subject").value;
 
+    if (name === "" || subject === "") {
+        alert("Please fill all fields");
+        return;
+    }
+
     var resources = JSON.parse(localStorage.getItem("resources")) || [];
 
-    resources.push({
-        name: name,
-        subject: subject
-    });
+    resources.push({name: name, subject: subject});
 
     localStorage.setItem("resources", JSON.stringify(resources));
 
-    alert("Saved!");
+    alert("Resource saved successfully");
 
-    window.location.href = "catalog.html";
+    document.getElementById("name").value = "";
+    document.getElementById("subject").value = "";
 }
 </script>
 

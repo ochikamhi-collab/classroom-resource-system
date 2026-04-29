@@ -1,34 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Catalog</title>
-     <style>
+    <meta charset="UTF-8">
+    <title>View Resources</title>
+
+    <style>
         body {
-            background-color:burlywood;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f6f9;
+            text-align: center;
         }
-        </style>
+
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 30px auto;
+            width: 80%;
+            background-color: white;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            padding: 6px 12px;
+            margin: 2px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .top-buttons {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
 <body>
 
-<h1>Resource Catalog</h1>
-<button onclick="clearAll()">clear All Resources</button>
+<header>
+    <h1>Available Resources</h1>
+</header>
 
-<p id="output"></p>
+<div class="top-buttons">
+    <button onclick="window.location.href='dashboard.html'">Back to Dashboard</button>
+    <button onclick="clearAll()">Clear All</button>
+</div>
 
-<a href="dashboard.html">Back to Dashboard</a>
+<div id="output"></div>
+
 <script>
 function displayResources() {
     var resources = JSON.parse(localStorage.getItem("resources")) || [];
     var output = document.getElementById("output");
 
     if (resources.length === 0) {
-        output.innerHTML = "No resources found";
+        output.innerHTML = "<p>No resources available</p>";
         return;
     }
 
-    var text = "<table border='1' style='margin:auto;'>";
-
+    var text = "<table>";
     text += "<tr><th>#</th><th>Name</th><th>Subject</th><th>Action</th></tr>";
 
     resources.forEach(function(item, index) {
@@ -37,7 +88,7 @@ function displayResources() {
         text += "<td>" + item.name + "</td>";
         text += "<td>" + item.subject + "</td>";
         text += "<td>";
-        text += "<button onclick='editResource(" + index + ")'>Edit</button> ";
+        text += "<button onclick='editResource(" + index + ")'>Edit</button>";
         text += "<button onclick='deleteResource(" + index + ")'>Delete</button>";
         text += "</td>";
         text += "</tr>";
@@ -58,20 +109,19 @@ function deleteResource(index) {
 function editResource(index) {
     var resources = JSON.parse(localStorage.getItem("resources")) || [];
 
-    var newName = prompt("Enter new resource name:", resources[index].name);
-    var newSubject = prompt("Enter new subject:", resources[index].subject);
+    var newName = prompt("Edit name:", resources[index].name);
+    var newSubject = prompt("Edit subject:", resources[index].subject);
 
     if (newName && newSubject) {
         resources[index].name = newName;
         resources[index].subject = newSubject;
-
         localStorage.setItem("resources", JSON.stringify(resources));
         displayResources();
     }
 }
 
 function clearAll() {
-    if (confirm("Are you sure you want to clear all resources?")) {
+    if (confirm("Delete all resources?")) {
         localStorage.removeItem("resources");
         displayResources();
     }
@@ -80,6 +130,5 @@ function clearAll() {
 displayResources();
 </script>
 
-
 </body>
-</html>   
+</html>
