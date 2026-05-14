@@ -3,31 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Upload Resource</title>
-
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
             background-color: #f4f6f9;
             text-align: center;
         }
-
-        header {
+        h1 {
             background-color: #007BFF;
             color: white;
-            padding: 15px;
+            padding: 20px;
         }
-
         .container {
-            margin-top: 40px;
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-
-        input {
+        input[type="text"], input[type="file"] {
             padding: 10px;
             margin: 10px;
-            width: 250px;
+            width: 300px;
         }
-
         button {
             padding: 10px 20px;
             background-color: #007BFF;
@@ -35,60 +32,25 @@
             border: none;
             cursor: pointer;
             border-radius: 5px;
+            margin: 20px;
         }
-
         button:hover {
             background-color: #0056b3;
         }
-
-        .back {
-            margin-top: 20px;
-            display: block;
-        }
     </style>
 </head>
-
 <body>
-
-<header>
     <h1>Upload Resource</h1>
-</header>
-
-<div class="container">
-
-    <input type="text" id="name" placeholder="Resource Name"><br>
-    <input type="text" id="subject" placeholder="Subject"><br>
-
-    <button onclick="saveResource()">Save Resource</button>
-
-    <button class="back" onclick="window.location.href='dashboard.html'">
-        Back to Dashboard
-    </button>
-
-</div>
-
-<script>
-function saveResource() {
-    var name = document.getElementById("name").value;
-    var subject = document.getElementById("subject").value;
-
-    if (name === "" || subject === "") {
-        alert("Please fill all fields");
-        return;
-    }
-
-    var resources = JSON.parse(localStorage.getItem("resources")) || [];
-
-    resources.push({name: name, subject: subject});
-
-    localStorage.setItem("resources", JSON.stringify(resources));
-
-    alert("Resource saved successfully");
-
-    document.getElementById("name").value = "";
-    document.getElementById("subject").value = "";
-}
-</script>
-
+    <div class="container">
+        <form id="uploadForm" action="http://localhost:3000/upload" method="POST" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="Resource Name" required><br>
+            <input type="text" name="subject" placeholder="Subject" required><br>
+            <input type="file" name="file" required><br>
+            <button type="submit">Upload Resource</button>
+        </form>
+    </div>
+    <script>
+        // Optional: You can add JavaScript validation here if needed.
+    </script>
 </body>
 </html>

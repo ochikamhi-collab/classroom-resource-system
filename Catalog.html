@@ -57,7 +57,11 @@
 </head>
 
 <body>
-
+<script>
+    if(localstorage.getItem("loggedIn")!=="true") {
+        windows.location.href="index.html";
+    }
+    </script> 
 <header>
     <h1>Available Resources</h1>
 </header>
