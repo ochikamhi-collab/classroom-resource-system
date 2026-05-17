@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Resources</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f6f9;
+            text-align: center;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 30px auto;
+            width: 80%;
+            background-color: white;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            padding: 6px 12px;
+            margin: 2px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .top-buttons {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<script>
+    if(localstorage.getItem("loggedIn")!=="true") {
+        windows.location.href="index.html";
+    }
+    </script> 
+<header>
+    <h1>Available Resources</h1>
+</header>
+
+<div class="top-buttons">
+    <button onclick="window.location.href='dashboard.html'">Back to Dashboard</button>
+    <button onclick="clearAll()">Clear All</button>
+</div>
+
+<div id="output"></div>
+
+<script>
+function displayResources() {
+    var resources = JSON.parse(localStorage.getItem("resources")) || [];
+    var output = document.getElementById("output");
+
+    if (resources.length === 0) {
+        output.innerHTML = "<p>No resources available</p>";
+        return;
+    }
+
+    var text = "<table>";
+    text += "<tr><th>#</th><th>Name</th><th>Subject</th><th>Action</th></tr>";
+
+    resources.forEach(function(item, index) {
+        text += "<tr>";
+        text += "<td>" + (index + 1) + "</td>";
+        text += "<td>" + item.name + "</td>";
+        text += "<td>" + item.subject + "</td>";
+        text += "<td>";
+        text += "<button onclick='editResource(" + index + ")'>Edit</button>";
+        text += "<button onclick='deleteResource(" + index + ")'>Delete</button>";
+        text += "</td>";
+        text += "</tr>";
+    });
+
+    text += "</table>";
+
+    output.innerHTML = text;
+}
+
+function deleteResource(index) {
+    var resources = JSON.parse(localStorage.getItem("resources")) || [];
+    resources.splice(index, 1);
+    localStorage.setItem("resources", JSON.stringify(resources));
+    displayResources();
+}
+
+function editResource(index) {
+    var resources = JSON.parse(localStorage.getItem("resources")) || [];
+
+    var newName = prompt("Edit name:", resources[index].name);
+    var newSubject = prompt("Edit subject:", resources[index].subject);
+
+    if (newName && newSubject) {
+        resources[index].name = newName;
+        resources[index].subject = newSubject;
+        localStorage.setItem("resources", JSON.stringify(resources));
+        displayResources();
+    }
+}
+
+function clearAll() {
+    if (confirm("Delete all resources?")) {
+        localStorage.removeItem("resources");
+        displayResources();
+    }
+}
+
+displayResources();
+</script>
+
+</body>
+</html>

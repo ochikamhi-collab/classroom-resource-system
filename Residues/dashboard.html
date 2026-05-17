@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:url('Background.png') no-repeat center center fixed;
+background-size:cover;
+}
+
+header{
+background:#12344d;
+color:#7fffd4;
+padding:20px;
+text-align:center;
+font-size:30px;
+font-weight:bold;
+}
+
+nav{
+display:flex;
+justify-content:center;
+gap:20px;
+background:#1b5e7a;
+padding:18px;
+}
+
+nav button{
+background:#2ecc71;
+color:white;
+border:none;
+padding:14px 25px;
+font-size:16px;
+border-radius:8px;
+cursor:pointer;
+}
+
+nav button:hover{
+background:#27ae60;
+}
+
+.main{
+display:flex;
+justify-content:center;
+margin-top:120px;
+}
+
+.upload-box{
+background:#12344d;
+padding:50px;
+border-radius:15px;
+text-align:center;
+width:500px;
+color:white;
+}
+
+.choose-file{
+display:block;
+margin:20px auto;
+padding:18px;
+width:90%;
+font-size:18px;
+background:white;
+border-radius:8px;
+}
+
+.upload-btn{
+background:#2ecc71;
+color:white;
+border:none;
+padding:14px 30px;
+font-size:18px;
+border-radius:8px;
+cursor:pointer;
+margin-top:20px;
+}
+
+.upload-btn:hover{
+background:#27ae60;
+}
+</style>
+</head>
+
+<body>
+
+<header>CLASSROOM RESOURCE MANAGEMENT SYSTEM</header>
+
+<nav>
+<button onclick="showUpload()">UPLOAD</button>
+<button onclick="window.location.href='http://localhost:3000/resources'">VIEW</button>
+<button onclick="window.location.href='http://localhost:3000/manage-resources'">MANAGE</button>
+<button onclick="logout()">LOGOUT</button>
+</nav>
+
+<div class="main">
+
+<div class="upload-box" id="uploadArea">
+
+<h2>Choose File</h2>
+
+<form action="http://localhost:3000/upload" method="POST" enctype="multipart/form-data">
+
+<input class="choose-file" type="file" name="myFile" required>
+
+<br>
+
+<button class="upload-btn" type="submit">
+UPLOAD FILE
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<script>
+
+if(localStorage.getItem("loggedIn") !== "true"){
+window.location.href="index.html";
+}
+
+function logout(){
+localStorage.removeItem("loggedIn");
+window.location.href="index.html";
+}
+
+function showUpload(){
+document.getElementById("uploadArea").scrollIntoView({
+behavior:"smooth"
+});
+}
+
+</script>
+
+</body>
+</html>
