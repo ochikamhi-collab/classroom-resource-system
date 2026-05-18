@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url('Background.png') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-box {
+  background: rgba(15,40,70,0.95);
+  padding: 40px;
+  border-radius: 15px;
+  width: 380px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  color: white;
+}
+
+h1 {
+  margin-bottom: 25px;
+  color: #7fffd4;
+}
+
+input {
+  width: 90%;
+  padding: 15px;
+  margin: 15px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+button {
+  background: #2ecc71;
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  width: 100%;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #27ae60;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+  <h1>LOGIN SYSTEM</h1>
+
+  <input type="text" id="username" placeholder="Enter Username" required>
+  <input type="password" id="password" placeholder="Enter Password" required>
+
+  <button onclick="login()">LOGIN</button>
+</div>
+
+<script>
+const correctPassword = "CRMS2026Secure";
+
+function login() {
+  let enteredUser = document.getElementById("username").value.trim();
+  let enteredPass = document.getElementById("password").value;
+
+  if (enteredUser === "") {
+    alert("Please enter a username");
+    return;
+  }
+
+  if (enteredPass === correctPassword) {
+    localStorage.setItem("loggedIn", "true");
+    localStorage.setItem("username", enteredUser);
+    window.location.href = "dashboard.html";
+  } else {
+    alert("Incorrect Password");
+  }
+}
+</script>
+
+</body>
+</html>
